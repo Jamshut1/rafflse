@@ -1,0 +1,33 @@
+<body>
+
+  <div class="layout">
+    <!-- Сайдбар слева -->
+    <div class="sidebar">
+      <button onclick="showSection('giveaways')">🎁 Розыгрыши</button>
+      <button onclick="showSection('inventory')">🎒 Инвентарь</button>
+      <button onclick="showSection('profile')">👤 Профиль</button>
+    </div>
+
+    <!-- Контент -->
+    <div class="main">
+      <div id="giveaways" class="section active">
+        <h2>🎁 Розыгрыши</h2>
+        <button id="connect-wallet">🔗 Подключить кошелёк</button>
+        <p id="wallet-address">Кошелёк не подключён</p>
+      </div>
+
+      <div id="inventory" class="section">
+        <h2>🎒 Инвентарь</h2>
+        <p>Здесь появятся ваши подарки.</p>
+      </div>
+
+      <div id="profile" class="section">
+        <h2>👤 Профиль</h2>
+        <p>Имя пользователя: <span id="username">Загрузка...</span></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/@tonconnect/sdk@latest"></script>
+  <script src="script.js"></script>
+</body>
