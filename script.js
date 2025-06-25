@@ -1,32 +1,23 @@
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(section => {
-    section.classList.remove('active');
-  });
-  document.getElementById(id).classList.add('active');
+function showSection(sectionId) {
+  const sections = document.querySelectorAll('.section');
+  sections.forEach(sec => sec.classList.remove('active'));
+  document.getElementById(sectionId).classList.add('active');
 }
 
-// Telegram WebApp + TON Connect
 window.onload = async () => {
-  const tg = window.Telegram.WebApp;
-  tg.expand();
+  console.log('Сайт загружен');
 
-  const username = tg.initDataUnsafe.user?.username || "Гость";
-  document.getElementById('username').innerText = username;
+  const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+    manifestUrl: 'https://steady-zuccutto-1ad9b2.netlify.app/tonconnect-manifest.json',
+    buttonRootId: 'ton-connect-button'
+  });
 
-  // TonConnect
-  const tonConnect = new TonConnect();
-
-  const connectWalletBtn = document.getElementById('connect-wallet');
-  const walletAddressEl = document.getElementById('wallet-address');
-
-  connectWalletBtn.addEventListener('click', async () => {
-    await tonConnect.connectWallet();
-
-    const wallet = tonConnect.wallet;
-    if (wallet?.account) {
-      walletAddressEl.innerText = `🔹 Кошелёк: ${wallet.account.address}`;
+  // Подписка на изменения статуса
+  tonConnectUI.onStatusChange(wallet => {
+    if (wallet && wallet.account?.address) {
+      document.getElementById('wallet-address').innerText = `🔹 Адрес: ${wallet.account.address}`;
     } else {
-      walletAddressEl.innerText = 'Кошелёк не подключён';
+      document.getElementById('wallet-address').innerText = 'Кошелёк не подключён';
     }
   });
 };
