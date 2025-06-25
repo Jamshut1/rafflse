@@ -1,36 +1,21 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <title>TonConnect UI тест</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    body { font-family: Arial, sans-serif; padding: 30px; }
-    #ton-connect-button { margin-top: 20px; }
-  </style>
+<meta charset="UTF-8" />
+<title>Test TON_CONNECT_UI</title>
 </head>
 <body>
-  <h1>Проверка TonConnect UI</h1>
-  <div id="ton-connect-button"></div>
-  <p id="wallet-address">Кошелёк не подключён</p>
+  <h1>Test TON_CONNECT_UI</h1>
 
-  <!-- Правильный UMD-бандл для браузера -->
   <script src="https://cdn.jsdelivr.net/npm/@tonconnect/ui@0.4.0/dist/tonconnect-ui.browser.min.js"></script>
-
   <script>
     window.onload = () => {
-      const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-        manifestUrl: 'https://rafflse.netlify.app/tonconnect-manifest.json',
-        buttonRootId: 'ton-connect-button'
-      });
-
-      tonConnectUI.onStatusChange(wallet => {
-        if (wallet && wallet.account?.address) {
-          document.getElementById('wallet-address').innerText = `🔹 Адрес: ${wallet.account.address}`;
-        } else {
-          document.getElementById('wallet-address').innerText = 'Кошелёк не подключён';
-        }
-      });
+      console.log('TON_CONNECT_UI =', typeof TON_CONNECT_UI);
+      if (typeof TON_CONNECT_UI === 'undefined') {
+        alert('TON_CONNECT_UI is undefined');
+      } else {
+        alert('TON_CONNECT_UI loaded!');
+      }
     };
   </script>
 </body>
