@@ -1,7 +1,13 @@
 {
-  "url": "https://rafflse.netlify.app",
-  "name": "Rafflse App",
-  "iconUrl": "https://example.com/icon.png",
-  "termsUrl": "https://example.com/terms",
-  "privacyPolicyUrl": "https://example.com/privacy"
+  "name": "Rafflse",
+  "description": "Приложение для розыгрышей TON",
+  "icons": [
+    {
+      "src": "https://rafflse.netlify.app/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "https://rafflse.netlify.app",
+  "display": "standalone"
 }
