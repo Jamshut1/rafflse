@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Rafflse App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Стили можно вынести в отдельный файл позже -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    /* Весь CSS здесь, чтобы не было внешних файлов */
+
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       background: #f9f9f9;
       color: #333;
     }
@@ -25,25 +25,26 @@
 
     .container {
       padding: 20px;
+      margin-bottom: 60px; /* чтоб навигация не перекрывала */
     }
 
     .nav {
       position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      bottom: 0; left: 0; right: 0;
       height: 60px;
       background: #fff;
       display: flex;
       justify-content: space-around;
       align-items: center;
       border-top: 1px solid #ddd;
+      z-index: 100;
     }
 
     .nav button {
       background: none;
       border: none;
       font-size: 16px;
+      cursor: pointer;
     }
 
     .section {
@@ -71,7 +72,6 @@
     <!-- Розыгрыши -->
     <div id="giveaways" class="section active">
       <h2>Розыгрыши</h2>
-      <!-- Кнопка подключения кошелька -->
       <div id="ton-connect-button"></div>
       <p id="wallet-address">Кошелёк не подключён</p>
     </div>
@@ -89,7 +89,6 @@
     </div>
   </div>
 
-  <!-- Нижняя навигация -->
   <div class="nav">
     <button onclick="showSection('inventory')">🎒 Инвентарь</button>
     <button onclick="showSection('giveaways')">🎁 Розыгрыши</button>
@@ -98,6 +97,27 @@
 
   <!-- TonConnect UI SDK -->
   <script src="https://unpkg.com/@tonconnect/ui@latest"></script>
-  <script src="script.js"></script>
+  <script>
+    // Показываем нужный раздел
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+    }
+
+    window.onload = () => {
+      const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+        manifestUrl: 'https://steady-zuccutto-1ad9b2.netlify.app/tonconnect-manifest.json',
+        buttonRootId: 'ton-connect-button'
+      });
+
+      tonConnectUI.onStatusChange(wallet => {
+        if (wallet && wallet.account?.address) {
+          document.getElementById('wallet-address').innerText = `🔹 Адрес: ${wallet.account.address}`;
+        } else {
+          document.getElementById('wallet-address').innerText = 'Кошелёк не подключён';
+        }
+      });
+    };
+  </script>
 </body>
 </html>
