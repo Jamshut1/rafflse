@@ -2,25 +2,21 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>Rafflse Test Connect</title>
+  <title>TonConnect UI тест</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 40px;
-    }
-    #ton-connect-button {
-      margin-top: 20px;
-    }
+    body { font-family: Arial, sans-serif; padding: 30px; }
+    #ton-connect-button { margin-top: 20px; }
   </style>
 </head>
 <body>
   <h1>Проверка TonConnect UI</h1>
-
   <div id="ton-connect-button"></div>
   <p id="wallet-address">Кошелёк не подключён</p>
 
-  <script src="https://unpkg.com/@tonconnect/ui@latest"></script>
+  <!-- Правильный UMD-бандл для браузера -->
+  <script src="https://cdn.jsdelivr.net/npm/@tonconnect/ui/dist/tonconnect-ui.browser.min.js"></script>
+
   <script>
     window.onload = () => {
       const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
