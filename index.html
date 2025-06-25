@@ -2,108 +2,26 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>Rafflse App</title>
+  <title>Rafflse Test Connect</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    /* Весь CSS здесь, чтобы не было внешних файлов */
-
     body {
       font-family: Arial, sans-serif;
-      margin: 0; padding: 0;
-      background: #f9f9f9;
-      color: #333;
+      padding: 40px;
     }
-
-    header {
-      padding: 16px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      background: #ffffff;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .container {
-      padding: 20px;
-      margin-bottom: 60px; /* чтоб навигация не перекрывала */
-    }
-
-    .nav {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      height: 60px;
-      background: #fff;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      border-top: 1px solid #ddd;
-      z-index: 100;
-    }
-
-    .nav button {
-      background: none;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .section {
-      display: none;
-    }
-
-    .section.active {
-      display: block;
-    }
-
     #ton-connect-button {
       margin-top: 20px;
-    }
-
-    #wallet-address {
-      margin-top: 10px;
-      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <header>🎁 Rafflse App</header>
+  <h1>Проверка TonConnect UI</h1>
 
-  <div class="container">
-    <!-- Розыгрыши -->
-    <div id="giveaways" class="section active">
-      <h2>Розыгрыши</h2>
-      <div id="ton-connect-button"></div>
-      <p id="wallet-address">Кошелёк не подключён</p>
-    </div>
+  <div id="ton-connect-button"></div>
+  <p id="wallet-address">Кошелёк не подключён</p>
 
-    <!-- Инвентарь -->
-    <div id="inventory" class="section">
-      <h2>Инвентарь</h2>
-      <p>Здесь будет ваш инвентарь.</p>
-    </div>
-
-    <!-- Профиль -->
-    <div id="profile" class="section">
-      <h2>Профиль</h2>
-      <p>Информация о пользователе.</p>
-    </div>
-  </div>
-
-  <div class="nav">
-    <button onclick="showSection('inventory')">🎒 Инвентарь</button>
-    <button onclick="showSection('giveaways')">🎁 Розыгрыши</button>
-    <button onclick="showSection('profile')">👤 Профиль</button>
-  </div>
-
-  <!-- TonConnect UI SDK -->
   <script src="https://unpkg.com/@tonconnect/ui@latest"></script>
   <script>
-    // Показываем нужный раздел
-    function showSection(sectionId) {
-      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(sectionId).classList.add('active');
-    }
-
     window.onload = () => {
       const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
         manifestUrl: 'https://rafflse.netlify.app/tonconnect-manifest.json',
